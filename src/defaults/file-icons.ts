@@ -932,6 +932,8 @@ export const fileIcons: FileIcons = {
 			"tsconfig.mjs.json",
 			"tsconfig.doc.json",
 			"tsconfig.paths.json",
+			"tsconfig.types.json",
+			"tsconfig.scripts.json",
 			"tsconfig.main.json",
 			"tsconfig.cypress-ct.json",
 			"tsconfig.components.json",

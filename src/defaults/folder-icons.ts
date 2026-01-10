@@ -2,12 +2,29 @@ interface FolderIcons {
 	[key: string]: string[];
 }
 
+function generateSubstringPatterns(base: string, prefixes: string[] = [], suffixes: string[] = []): string[] {
+	const patterns = [base];
+	prefixes.forEach(prefix => {
+		patterns.push(`${prefix}-${base}`, `${prefix}_${base}`, `${prefix}${base}`);
+	});
+	suffixes.forEach(suffix => {
+		patterns.push(`${base}-${suffix}`, `${base}_${suffix}`, `${base}${suffix}`);
+	});
+	// Add combinations of prefixes and suffixes
+	prefixes.forEach(prefix => {
+		suffixes.forEach(suffix => {
+			patterns.push(`${prefix}-${base}-${suffix}`, `${prefix}_${base}_${suffix}`);
+		});
+	});
+	return patterns;
+}
+
 /// keep-sorted
 export const folderIcons: FolderIcons = {
 	admin: ["admin", "admins", "manager", "managers", "moderator", "moderators", "moderation"],
 	animation: ["animation", "animations", "anim", "anims", "animated"],
 	assets: [],
-	audio: ["audio", "audios", "sound", "sounds", "music", "aud", "auds"],
+	audio: generateSubstringPatterns("audio", ["src", "assets", "project", "my", "app", "client", "server"], ["files", "clips", "samples", "tracks", "data", "content", "assets"]).concat(["audios", "sound", "sounds", "music", "aud", "auds", "media", "AudioPlayer"]),
 	auth: ["auth", "authentication", "auths", "authenticator", "authenticators", "security"],
 	benchmark: ["benchmark", "benchmarks", "bench", "benches", "benchs", "performance", "measure", "measures", "measurement"],
 	bin: ["binaries", "binary"],
@@ -75,12 +92,13 @@ export const folderIcons: FolderIcons = {
 		"saves",
 		"playerdata",
 		"player-data",
+		"queries",
 	],
-	dist: ["bin", "bins", "dist", "dist-newstyle", "out", "build", "release", ".output"],
+	dist: ["bin", "bins", "dist", "dist-newstyle", "out", "build", "release", ".output", "generated", "gen", "codegen", "auto", "automatic"],
 	docs: ["docs", "_post", "_posts", "doc", "document", "documents", "documentation", "post", "posts", "article", "articles"],
 	effects: ["effects", "vfx", "particles"],
 	error: ["error", "errors", "exception", "exceptions", "issue", "issues"],
-	event: ["event", "events", "remote", "remotes"],
+	event: ["event", "events", "remote", "remotes", "realtime"],
 	fonts: ["fonts", "font", "typeface", "typefaces"],
 	function: [
 		"function",
@@ -96,6 +114,8 @@ export const folderIcons: FolderIcons = {
 		"calcs",
 		"calculation",
 		"calculations",
+		"mutations",
+		"search",
 	],
 	github: ["github", ".github", ".git", "patches", "githooks", ".githooks", "submodules", ".submodules"],
 	hooks: ["hooks", "hook", "composables", "composable"],
@@ -189,6 +209,7 @@ export const folderIcons: FolderIcons = {
 		"actors",
 		"workflow",
 		"workflows",
+		"realtime provider",
 	],
 	source: ["source", "sources", "src", "srcs", "code", "src-tauri"],
 	storybook: ["storybook", ".storybook", "stories", "__stories__"],
